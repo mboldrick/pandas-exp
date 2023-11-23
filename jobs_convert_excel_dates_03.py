@@ -2,8 +2,8 @@ import pandas as pd
 import re
 
 # Replace with the path to your Excel file
-input_file = "data/BS Jobs cropped.xlsx"
-output_file = "data/BS Jobs cropped processed.xlsx"
+input_file = "data/BS Jobs.xlsx"
+output_file = "data/BS Jobs processed.xlsx"
 
 
 # Function to pad job numbers with zeros to make them 4 digits long
@@ -39,13 +39,15 @@ def convert_date(date):
 
 def process_data(input_file):
     # Read the Excel file into a DataFrame
+    # TODO - set po_no as string so that leading zeros are not removed,
+    # the column is not treated as numeric, and the cell alignment is consistent
     df = pd.read_excel(input_file)
 
     # Apply the padding function to the 'job_no' column
-    df["job_no"] = df["job_no"].apply(pad_job_no)
+    df["job_num"] = df["job_no"].apply(pad_job_no)
 
     # Apply the conversion function to the 'date' column
-    df["date"] = df["date"].apply(convert_date)
+    df["start_date"] = df["date"].apply(convert_date)
 
     # Print the 'job_no' and 'date' columns
     print(df[["job_no", "date"]])
