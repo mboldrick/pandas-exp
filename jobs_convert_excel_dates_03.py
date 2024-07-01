@@ -56,5 +56,5 @@ def process_data(input_file):
     df.to_excel(output_file, index=False)
 
 
-# Execute the function
-process_data(input_file)
+if __name__ == '__main__':
+    process_data(input_file)
